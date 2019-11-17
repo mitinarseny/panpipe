@@ -24,5 +24,6 @@ return {
       error('unable to process code block'
         .. ((block.identifier ~= '' and (' #' .. block.identifier)) or '') .. ': ' .. tostring(res))
     end
+    return res
   end},
 }
