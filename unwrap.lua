@@ -22,7 +22,7 @@ return {
     local ok, res = pcall(CodeBlock, block)
     if not ok then
       error('unable to process code block'
-        .. ((block.identifier ~= '' and (' #' .. block.identifier)) or '') .. ': ' .. res)
+        .. ((block.identifier ~= '' and (' #' .. block.identifier)) or '') .. ': ' .. tostring(res))
     end
   end},
 }
