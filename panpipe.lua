@@ -1,7 +1,8 @@
 local cacheEnabled = true
 local cacheDir = '.panpipe'
 
-local metaPipeCache = 'panpipeCache'
+local metaCacheEnabled = 'panpipeCacheEnabled'
+local metaCacheDir = 'panpipeCacheDir'
 
 local pipeAttr = 'pipe'
 local depsAttr = 'deps'
@@ -17,8 +18,11 @@ local function initCache()
 end
 
 function Meta(meta)
-  if type(meta[metaPipeCache]) == 'boolean'  then
-    cacheEnabled = meta[metaPipeCache]
+  if type(meta[metaCacheEnabled]) == 'boolean'  then
+    cacheEnabled = meta[metaCacheEnabled]
+  end
+  if type(meta[metaCacheDir]) == 'string' then
+    cacheDir = meta[cacheDir]
   end
   initCache()
 end
@@ -132,7 +136,7 @@ return {
     local ok, res = pcall(CodeBlock, block)
     if not ok then
       error('error while processing code block'
-        .. ((block.identifier ~= '' and (' #' .. block.identifier)) or '') .. ': ' .. res)
+        .. ((block.identifier ~= '' and (' #' .. block.identifier)) or '') .. ': ' .. tostring(res))
     end
     return res
   end},
